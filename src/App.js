@@ -20,7 +20,7 @@ class App extends Component {
                             <a>Home</a>
                         </li>
                         <li>
-                            <a>Link</a>
+                            <a>Link adfadfas</a>
                         </li>
                     </ul>
                 </nav>
