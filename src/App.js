@@ -3,6 +3,15 @@ import './App.css';
 import Product from './components/Product';
 
 class App extends Component {
+
+    onClick(){
+        console.log('Day la app component');
+    }
+
+    onClick2(text){
+        console.log(text);
+    }
+
     render() {
         var products = [
             {
@@ -54,7 +63,15 @@ class App extends Component {
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 { elements }
-                            </div>
+                            </div>                            
+                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                
+                                <button type="button" className="btn btn-danger" onClick={ this.onClick }>
+                                    Click Me !
+                                </button>
+                                <button type="button" className="btn btn-danger" onClick={ () => { this.onClick2('ABC') } }>
+                                    Click Me 2 !
+                                </button>                    
+                            </div>                            
                         </div>
                     </div>
                 </div>
