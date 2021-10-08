@@ -1,107 +1,65 @@
 import React, { Component } from 'react';
 import './App.css';
+import ColorPicker from './components/ColorPicker';
+import SizeSetting from './components/SizeSetting';
+import Reset from './components/Reset';
+import Result from './components/Result';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      products : [
-        {
-          id : 1,
-          name : 'Apple Iphone 6 Plus 16GB',
-          price: '15.000.000',
-          image : "https://phuckhangmobile.com/file/iphone-6-plus-bac-900-19515f.jpg",
-          status : true,
-        },
-        {
-          id : 2,
-          name : 'Samsung Galaxy S7',
-          price: '18.000.000',
-          image : "https://didonghathanh.com.vn/wp-content/uploads/2019/11/anh-dai-dien-samsung-s7-edge-didonghathanh-dep-99.jpg",
-          status : true,
-        },
-        {
-          id : 3,
-          name : 'Oppo F1s',
-          price: '7.000.000',
-          image : "https://cdn.tgdd.vn/Products/Images/42/81592/oppo-f1s-7-300x300.jpg",
-          status : true,
-        }
-      ],
-      isActive : true
+      color : 'red',
+      fontSize : 12
     };
-    // this.onSetState = this.onSetState.bind(this);
+    this.onSetColor = this.onSetColor.bind(this);
+    this.onChangeSize=this.onChangeSize.bind(this);
+    this.onSettingDefault=this.onSettingDefault.bind(this);
   }
 
-  onSetState = () => {
-    // if(this.state.isActive === true){
-    //   this.setState({
-    //     isActive : false
-    //   });
-    // } else{
-    //   this.setState({
-    //     isActive : true
-    //   });
-    // }
-
+  onSetColor(params){
     this.setState({
-      isActive : !this.state.isActive
+      color : params
     });
   }
 
-    render() {
+  onChangeSize(value){
+    // 8 <= size <= 36
+    this.setState({
+      fontSize : (this.state.fontSize + value >= 8 && this.state.fontSize + value <= 36) ? this.state.fontSize + value : this.state.fontSize // +2 -2
+    });
+  }
 
-      let elements = this.state.products.map((product, index) => {
-        let result = '';
-          if(product.status){
-            result =  <tr key= { index }>
-                        <td> { index }</td>
-                        <td>{ product.name }</td>
-                        <td>
-                          <span className="label label-success"> { product.price } VNĐ</span>
-                        </td>
-                      </tr>
-          }
-        return result;
+  onSettingDefault(value){
+    if(value === true){
+      this.setState({
+        color : 'red',
+        fontSize : 12
       });
-
-        return (
-          <div>
-            <nav className="navbar navbar-inverse">
-              <div className="container-fluid">
-                <a className="navbar-brand">State</a>
-              </div>
-            </nav>
-            <div className="container">
-              <div className="row">
-                <div className="row">
-                  <table className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>STT</th>
-                        <th>Tên Sản Phẩm</th>
-                        <th>Giá</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      { elements }
-                    </tbody>
-                  </table>
-                  
-                  <button type="button" className="btn btn-warning" onClick={ this.onSetState } >
-                    Active : { this.state.isActive === true ? 'true' : 'false' }
-                  </button>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        );
     }
+  }
+
+  render() {
+    return (
+      <div className="container mt-50">
+        <div className="row">
+          <ColorPicker color={this.state.color} onReceiveColor={ this.onSetColor } />
+          <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <SizeSetting 
+              fontSize={ this.state.fontSize } 
+              onChangeSize={this.onChangeSize} 
+            />
+            <Reset onSettingDefault={this.onSettingDefault} />
+          </div>
+          <Result color={this.state.color} fontSize={this.state.fontSize}/>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
 
 
-// hoc den day https://youtu.be/zv5HI-ng3I0?list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp
+// hoc den day https://www.youtube.com/watch?v=NfzT46L38Cg&list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp&index=15
