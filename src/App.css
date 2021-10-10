@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  pointer-events: none;
+  height: 80px;
 }
 
 .App-header {
@@ -31,21 +31,6 @@
   }
 }
 
-.mt-50 {
-  margin-top: 50px;
-}
-
-span {
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.active{
-  border: solid 3px black;
-}
-
-#content{
-  padding: 10px;
-  border: solid 3px red;
+.mt-30 {
+  margin-top: 30px;
 }

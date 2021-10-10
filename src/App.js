@@ -1,65 +1,146 @@
 import React, { Component } from 'react';
 import './App.css';
-import ColorPicker from './components/ColorPicker';
-import SizeSetting from './components/SizeSetting';
-import Reset from './components/Reset';
-import Result from './components/Result';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      color : 'red',
-      fontSize : 12
+      txtUsername : 'aaa',
+      txtPassword : '',
+      txtDesc : 'eee',
+      sltGender : 1,
+      rdLang : "vi",
+      chkbStatus : false,
     };
-    this.onSetColor = this.onSetColor.bind(this);
-    this.onChangeSize=this.onChangeSize.bind(this);
-    this.onSettingDefault=this.onSettingDefault.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
   }
 
-  onSetColor(params){
+  onHandleChange(event){
+    var target = event.target;
+    var name = target.name;
+    var value = target.type === 'checkbox' ? target.checked : target.value ;
     this.setState({
-      color : params
+      [name] : value
     });
   }
 
-  onChangeSize(value){
-    // 8 <= size <= 36
-    this.setState({
-      fontSize : (this.state.fontSize + value >= 8 && this.state.fontSize + value <= 36) ? this.state.fontSize + value : this.state.fontSize // +2 -2
-    });
-  }
-
-  onSettingDefault(value){
-    if(value === true){
-      this.setState({
-        color : 'red',
-        fontSize : 12
-      });
-    }
+  onHandleSubmit(event){
+    event.preventDefault();
+    console.log(this.state);
   }
 
   render() {
-    return (
-      <div className="container mt-50">
+    return (  
+      <div className="container mt-30">        
         <div className="row">
-          <ColorPicker color={this.state.color} onReceiveColor={ this.onSetColor } />
-          <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <SizeSetting 
-              fontSize={ this.state.fontSize } 
-              onChangeSize={this.onChangeSize} 
-            />
-            <Reset onSettingDefault={this.onSettingDefault} />
+          <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">            
+            <div className="panel panel-primary">
+                <div className="panel-heading">
+                  <h3 className="panel-title">From</h3>
+                </div>
+                <div className="panel-body">
+                  
+                  <form onSubmit={ this.onHandleSubmit}>
+                  
+                    <div className="form-group">
+                      <label>UserName: </label>
+                      <input 
+                      type="text" 
+                      className="form-control" 
+                      name="txtUsername" 
+                      onChange={ this.onHandleChange }
+                      value={this.state.txtUsername}
+                      />
+                    </div> 
+
+                    <div className="form-group">
+                      <label>Password: </label>
+                      <input 
+                      type="password" 
+                      className="form-control" 
+                      name="txtPassword" 
+                      onChange={ this.onHandleChange }
+                      value={this.state.txtPassword}
+                      />
+                    </div>      
+
+                    <div className="form-group">
+                      <label>Mô tả </label>
+                      <textarea                       
+                        clasName="form-control" 
+                        rows="3"
+                        name="txtDesc" 
+                        onChange={ this.onHandleChange }
+                        value={this.state.txtDesc}
+                      ></textarea>
+                    </div>      
+                    <label>Giới Tính</label>
+                    <select 
+                    className="form-control" 
+                    name="sltGender" 
+                    value={this.state.sltGender}
+                    onChange={ this.onHandleChange }
+                    >
+                      <option value={0}>Nữ</option>
+                      <option value={1}>Nam</option>
+                    </select>
+                      <br/>
+                      <label>Ngôn ngữ</label>
+                      <div className="radio">
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="rdLang" 
+                            value="en"
+                            onChange={ this.onHandleChange }
+                            checked={ this.state.rdLang === "en" }
+                          />
+                          Tiếng Anh
+                        </label><br/>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="rdLang" 
+                            value="vi"
+                            onChange={ this.onHandleChange }
+                            checked={ this.state.rdLang === "vi" }
+                          />
+                          Tiếng Việt
+                        </label>
+                      </div>
+                                            
+                      <div className="checkbox">
+                        <label>
+                          <input 
+                            type="checkbox" 
+                            name="chkbStatus"
+                            value={true}
+                            onChange={ this.onHandleChange }
+                            checked={ this.state.chkbStatus === true }
+                          />
+                          Trạng thái
+                        </label>
+                      </div>
+                  
+                    <button type="submit" className="btn btn-primary">Lưu lại</button>&nbsp;
+                    <button type="submit" className="btn btn-default">Xóa trắng</button>
+
+                  </form>
+                  
+                </div>
+            </div>
+            
           </div>
-          <Result color={this.state.color} fontSize={this.state.fontSize}/>
         </div>
+        
       </div>
-    );
+    );    
   }
 }
 
 export default App;
 
 
-// hoc den day https://www.youtube.com/watch?v=NfzT46L38Cg&list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp&index=15
+// hoc den day https://www.youtube.com/watch?v=494HPoUmqdI&list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp&index=16
