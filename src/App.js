@@ -1,134 +1,40 @@
 import React, { Component } from 'react';
 import './App.css';
+import TaskForm from './components/TaskForm';
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      txtUsername : 'aaa',
-      txtPassword : '',
-      txtDesc : 'eee',
-      sltGender : 1,
-      rdLang : "vi",
-      chkbStatus : false,
-    };
-    this.onHandleChange = this.onHandleChange.bind(this);
-    this.onHandleSubmit = this.onHandleSubmit.bind(this);
-  }
-
-  onHandleChange(event){
-    var target = event.target;
-    var name = target.name;
-    var value = target.type === 'checkbox' ? target.checked : target.value ;
-    this.setState({
-      [name] : value
-    });
-  }
-
-  onHandleSubmit(event){
-    event.preventDefault();
-    console.log(this.state);
-  }
-
-  render() {
-    return (  
-      <div className="container mt-30">        
+  render(){
+    return(
+      <div className="container">
+        <div className="text-center">
+          <h1>Quản Lý Công Việc</h1><hr/>
+        </div>
         <div className="row">
-          <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">            
-            <div className="panel panel-primary">
+          <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            {/* Form */ } 
+            <TaskForm />
+            <div className="panel panel-warning">
                 <div className="panel-heading">
-                  <h3 className="panel-title">From</h3>
+                  <h3 className="panel-title">
+                    Thêm công Việc
+                    <span
+                      className="fa fa-times-circle text-right"
+                    ></span>
+                    </h3>
                 </div>
                 <div className="panel-body">
-                  
-                  <form onSubmit={ this.onHandleSubmit}>
-                  
-                    <div className="form-group">
-                      <label>UserName: </label>
-                      <input 
-                      type="text" 
-                      className="form-control" 
-                      name="txtUsername" 
-                      onChange={ this.onHandleChange }
-                      value={this.state.txtUsername}
-                      />
-                    </div> 
-
-                    <div className="form-group">
-                      <label>Password: </label>
-                      <input 
-                      type="password" 
-                      className="form-control" 
-                      name="txtPassword" 
-                      onChange={ this.onHandleChange }
-                      value={this.state.txtPassword}
-                      />
-                    </div>      
-
-                    <div className="form-group">
-                      <label>Mô tả </label>
-                      <textarea                       
-                        clasName="form-control" 
-                        rows="3"
-                        name="txtDesc" 
-                        onChange={ this.onHandleChange }
-                        value={this.state.txtDesc}
-                      ></textarea>
-                    </div>      
-                    <label>Giới Tính</label>
-                    <select 
-                    className="form-control" 
-                    name="sltGender" 
-                    value={this.state.sltGender}
-                    onChange={ this.onHandleChange }
-                    >
-                      <option value={0}>Nữ</option>
-                      <option value={1}>Nam</option>
-                    </select>
-                      <br/>
-                      <label>Ngôn ngữ</label>
-                      <div className="radio">
-                        <label>
-                          <input 
-                            type="radio" 
-                            name="rdLang" 
-                            value="en"
-                            onChange={ this.onHandleChange }
-                            checked={ this.state.rdLang === "en" }
-                          />
-                          Tiếng Anh
-                        </label><br/>
-                        <label>
-                          <input 
-                            type="radio" 
-                            name="rdLang" 
-                            value="vi"
-                            onChange={ this.onHandleChange }
-                            checked={ this.state.rdLang === "vi" }
-                          />
-                          Tiếng Việt
-                        </label>
+                    <form>                    
+                      <div class="form-group">
+                        <label for="">Tên: </label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          name="name"
+                        />
                       </div>
-                                            
-                      <div className="checkbox">
-                        <label>
-                          <input 
-                            type="checkbox" 
-                            name="chkbStatus"
-                            value={true}
-                            onChange={ this.onHandleChange }
-                            checked={ this.state.chkbStatus === true }
-                          />
-                          Trạng thái
-                        </label>
-                      </div>
-                  
-                    <button type="submit" className="btn btn-primary">Lưu lại</button>&nbsp;
-                    <button type="submit" className="btn btn-default">Xóa trắng</button>
 
-                  </form>
-                  
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
             
@@ -136,11 +42,9 @@ class App extends Component {
         </div>
         
       </div>
-    );    
+    )
   }
 }
 
-export default App;
 
-
-// hoc den day https://www.youtube.com/watch?v=494HPoUmqdI&list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp&index=16
+hoc den day https://youtu.be/yCW6PP87-OU?list=PLJ5qtRQovuEOoKffoCBzTfvzMTTORnoyp&t=909
